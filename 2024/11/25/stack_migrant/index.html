@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Darkness_Sword">
 <meta property="og:description" content="一. 漏洞原理二. 漏洞利用任意地址写 情况1：存在多次输入和后门，并且第一次能够溢出，程序会对内存中 password 进行判断，如果通过则有利。  第一次溢出覆盖栈底 rbp &#x2F; ebp，修改为 password 存放地址附近（例如需要对 password 修改，第二次输入位置在 rbp &#x2F; ebp - 4 ，则 fake_rbp &#x2F; ebp 为 address[">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="d:\My_blog_website\public\img\1.png">
+<meta property="og:image" content="https://12yhy3.github.io/2024/11/25/stack_migrant/My_blog_website/public/img/1.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/gif/34628707/1706536374323-a5cd75a5-fb32-4097-9da6-de7b0dad8171.gif">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706613471638-30dcb5b4-654c-495e-b8e2-9425aaf60ee7.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706613479807-766b01bb-ceea-447f-b838-add0788621ca.png">
@@ -44,7 +44,7 @@
 <meta property="article:author" content="暮夜">
 <meta property="article:tag" content="&lt;span class&#x3D;&quot;label label-primary&quot;&gt;stack_migration&lt;&#x2F;span&gt;">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="d:\My_blog_website\public\img\1.png">
+<meta name="twitter:image" content="https://12yhy3.github.io/2024/11/25/stack_migrant/My_blog_website/public/img/1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -382,7 +382,7 @@
 </thead>
 <tbody><tr>
 <td>buf_start<font style="color:#2F4BDA;">   </font><font style="color:#D22D8D;"> aaaa</font></td>
-<td><font style="color:#DF2A3F;">      bss+0x800</font><br/>[利用后面的 leave ; ret<br/> 为payload3准备ebp】</td>
+<td><font style="color:#DF2A3F;">      bss+0x800</font><br>[利用后面的 leave ; ret<br> 为payload3准备ebp】</td>
 <td><font style="color:#601BDE;">aaaa</font></td>
 </tr>
 <tr>
@@ -432,7 +432,7 @@
 <p>题源：BUUCTF-PWN（<font style="color:rgb(33, 37, 41);">[NewStarCTF 2023 公开赛道]</font>）</p>
 </blockquote>
 <p><font style="color:#DF2A3F;"><strong>方法1：栈迁移+ret2libc3</strong></font></p>
-<h5 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h5><p><img src="D:\My_blog_website\public\img\1.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h5><p><img src="/2024/11/25/stack_migrant/My_blog_website\public\img\1.png" srcset="/img/loading.gif" lazyload></p>
 <h5 id="栈帧结构"><a href="#栈帧结构" class="headerlink" title="栈帧结构"></a>栈帧结构</h5><p>payload’2’为参考exp构造，<a target="_blank" rel="noopener" href="https://blog.csdn.net/Xzzzz911/article/details/133842017">详见</a>。官方wp同payload2。</p>
 <table>
 <thead>
@@ -448,7 +448,7 @@
 <tbody><tr>
 <td><font style="color:#5C8D07;">aaaaaaaa</font></td>
 <td>buf 1****</td>
-<td>:::color5 <strong><font style="color:#DF2A3F;">&lt;—-stack—&gt;</font></strong><br/>:::</td>
+<td>:::color5 <strong><font style="color:#DF2A3F;">&lt;—-stack—&gt;</font></strong><br>:::</td>
 <td>buf 1</td>
 <td><font style="color:#5C8D07;">aaaaaaaa</font></td>
 <td><font style="color:#5C8D07;">aaaaaaaa</font></td>
@@ -504,7 +504,7 @@
 <tr>
 <td>** fake_rbp**</td>
 <td><strong>（stack）</strong></td>
-<td>:::color5 <strong><font style="color:#DF2A3F;">&lt;——-rbp—&gt;</font></strong><br/>:::</td>
+<td>:::color5 <strong><font style="color:#DF2A3F;">&lt;——-rbp—&gt;</font></strong><br>:::</td>
 <td></td>
 <td>**  **** stack**</td>
 <td>**    stack+8**</td>
