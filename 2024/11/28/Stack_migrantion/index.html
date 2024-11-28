@@ -28,13 +28,22 @@
 <meta property="og:site_name" content="Darkness_Sword">
 <meta property="og:description" content="一. 漏洞原理 二. 漏洞利用 任意地址写 &gt; 情况1：存在**多次输入**和后门，并且第一次能够溢出，程序会对内存中 password 进行判断，如果通过则有利。 &gt;  第一次溢出覆盖栈底 rbp &#x2F; ebp，修改为 password 存放地址附近（例如需要对 password 修改，第二次输入位置在 rbp &#x2F; ebp - 4 ，则 fake_rbp &#x2F; ebp">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://12yhy3.github.io/img/fluid.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/gif/34628707/1706536374323-a5cd75a5-fb32-4097-9da6-de7b0dad8171.gif">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706613471638-30dcb5b4-654c-495e-b8e2-9425aaf60ee7.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706613479807-766b01bb-ceea-447f-b838-add0788621ca.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706614846465-7cb1bea0-bca5-4636-b1aa-4104471e45d2.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706625334763-bf872cff-e026-4fa9-b915-e24b5046a73b.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1706625502204-84a14677-bbf1-4fe2-9df4-07ec66686f95.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123197057-70bd5a85-6479-452d-b04b-f13ca979ef22.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123202931-fb0a2d97-986b-400b-8ca8-21b5269722cd.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123206113-46d449c7-7853-4ba0-82d4-31a631690d24.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/34628707/1707123628067-5bde1dff-294d-43c0-bfc4-f186a6749ad3.png">
 <meta property="article:published_time" content="2024-11-28T08:11:44.000Z">
-<meta property="article:modified_time" content="2024-11-28T08:12:04.115Z">
+<meta property="article:modified_time" content="2024-11-28T08:18:06.297Z">
 <meta property="article:author" content="暮夜">
 <meta property="article:tag" content="&lt;span class&#x3D;&quot;label label-primary&quot;&gt;PWN&lt;&#x2F;span&gt;">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://12yhy3.github.io/img/fluid.png">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/gif/34628707/1706536374323-a5cd75a5-fb32-4097-9da6-de7b0dad8171.gif">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -408,7 +417,8 @@
 
 <p><strong><font style="color:#DF2A3F;">方法1：栈迁移+ret2libc3</font></strong></p>
 <h5 id="Ro65Z">源码</h5>
-![](https://cdn.nlark.com/yuque/0/2024/png/34628707/1706529161394-ea8e452e-5474-49ef-8a63-3c9f45b97ebd.png)
+![](Stack_migration/1.png)
+![](./test/image.png)
 
 <h5 id="WPQdj">栈帧结构</h5>
 payload'2'为参考exp构造，[详见](https://blog.csdn.net/Xzzzz911/article/details/133842017)。官方wp同payload2。
